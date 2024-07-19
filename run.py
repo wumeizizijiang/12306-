@@ -4,32 +4,38 @@ import time
 import requests
 import os
 import datetime
+
+import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+
 # 获取selenium版本
-import selenium
-
-
 # print(selenium.__version__)
 
 
 # open chrome
 class TrainInfo:
     def __init__(self, from_station, to_station, train_date):
-        self.from_station = from_station
-        self.to_station = to_station
+        self.from_station = from_station # 起始车站
+        self.to_station = to_station # 目标车站
         self.train_date = train_date
 
     def station_table_to_en(self, from_station, to_station):
-        path = os.path.join(os.path.dirname(__file__), 'station_name.txt')
+        """
+        
+        """
+        # path = os.path.join(os.path.dirname(__file__), 'station_name.txt')
+        path = os.path.join(os.getcwd(), 'station_name.txt')
+        
         try:
             with open(path, encoding="utf-8") as result:
                 info = result.read().split('=')[1].strip("'").split('@')
         except Exception:
             with open(path) as result:
                 info = result.read().split('=')[1].strip("'").split('@')
+
         del info[0]
         station_name = {}
         for i in range(0, len(info)):
